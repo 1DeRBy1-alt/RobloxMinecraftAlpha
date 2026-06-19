@@ -14,7 +14,7 @@ local module = getgenv().ModuleManager.new("XRay", {})
 local xrayfolder = workspace:FindFirstChild("XrayFolder") or Instance.new("Folder", workspace)
 xrayfolder.Name = "XrayFolder"
 
-local WorldFunctions = loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraft/main/WorldFunctions.lua"))()
+local WorldFunctions = loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/WorldFunctions.lua"))()
 local getBlockID = WorldFunctions.getBlockID
 local convertBlockIdToBlockName = WorldFunctions.convertBlockIdToBlockName
 

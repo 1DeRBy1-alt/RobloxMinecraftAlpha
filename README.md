@@ -1,11 +1,10 @@
 # ⛏️ Roblox - MC Alpha 1.2.6 ⛏️
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraft/main/Minecraft.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Minecraft.lua"))()
 ```
 
-A high‑performance Luau-based cheat suite for the Roblox **MC Alpha 1.2.6** project.  
-Designed for efficiency, stealth, and dominance.
+A script for the Roblox **MC Alpha 1.2.6** game.
 
 [![Status](https://img.shields.io/badge/Status-Active-green)](https://github.com/)
 [![Language](https://img.shields.io/badge/Language-Luau-blue)](https://github.com/)

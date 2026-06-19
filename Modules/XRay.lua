@@ -1,11 +1,9 @@
 if getgenv().xrayLoaded == true then return end
 getgenv().xrayLoaded = true
 
--- Services --
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
--- Variables --
 local player = Players.LocalPlayer
 local ClientScript = player.PlayerScripts:WaitForChild("ClientScript")
 local env = getsenv(ClientScript)
@@ -25,6 +23,8 @@ local ores = {
     coal    = Color3.fromRGB(56, 59, 56),
 }
 
+local oreCache = {}
+
 local visuals = {}
 local chunksScanned = {}
 local scanning = {}
@@ -32,7 +32,6 @@ local scanning = {}
 local ChunksFolder = workspace:WaitForChild("Chunks")
 
 local function makeVisual(color, part)
-    if part:FindFirstChild("bulb") then return end
     local gui = Instance.new("BillboardGui")
     gui.Name = "bulb"
     gui.Parent = part
@@ -51,13 +50,21 @@ end
 
 local function getOreColor(name)
     if not name then return nil end
+    if oreCache[name] ~= nil then
+        return oreCache[name]
+    end
+    
     local lower = string.lower(name)
     for oreName, color in pairs(ores) do
         if string.find(lower, oreName) then
+            oreCache[name] = color
             return color
         end
     end
-    return string.find(lower, "ore") and Color3.new(1, 1, 1) or nil
+    
+    local isOre = string.find(lower, "ore") and Color3.new(1, 1, 1) or false
+    oreCache[name] = isOre
+    return isOre or nil
 end
 
 local function addVisual(x, y, z, color, name, chunkName)
@@ -69,6 +76,9 @@ local function addVisual(x, y, z, color, name, chunkName)
     part.Anchored = true
     part.CanCollide = false
     part.CanTouch = false
+    part.CanQuery = false
+    part.CanTouch = false
+    part.CastShadow = false
     part.Transparency = 1
     part.Size = Vector3.new(3, 3, 3)
     part.Position = Vector3.new(x * 3, y * 3, z * 3)
@@ -97,14 +107,23 @@ local function scanFullChunk(chunkX, chunkZ)
     scanning[chunkName] = true
     local startX = chunkX * 16
     local startZ = chunkZ * 16
+    local blockdata = chunk.blockdata
 
-    for y = 1, 63 do
+    for x = 0, 15 do
         if not module.enabled then break end
-        for x = 0, 15 do
+        
+        local xData = blockdata[x]
+        if not xData then continue end
+        
+        for y = 1, 63 do
+            local yData = xData[y]
+            if not yData then continue end
+            
             for z = 0, 15 do
-                local block = chunk:Get(x, y, z)
-                local id = type(block) == "table" and block.id or block
+                local block = yData[z]
+                if not block or block == 0 then continue end
                 
+                local id = type(block) == "table" and block.id or block
                 if id and id ~= 0 then
                     local name = convertBlockIdToBlockName(id)
                     local color = getOreColor(name)
@@ -114,7 +133,7 @@ local function scanFullChunk(chunkX, chunkZ)
                 end
             end
         end
-        if y % 16 == 0 then RunService.Heartbeat:Wait() end
+        if x % 4 == 0 then RunService.Heartbeat:Wait() end
     end
 
     chunksScanned[chunkName] = true

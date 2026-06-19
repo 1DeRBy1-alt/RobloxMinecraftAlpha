@@ -17,7 +17,7 @@ local module = getgenv().ModuleManager.new("Scaffold", {
 })
 
 -- World Functions --
-local WorldFunctions = loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraft/refs/heads/main/WorldFunctions.lua"))()
+local WorldFunctions = loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/refs/heads/main/WorldFunctions.lua"))()
 local getBlockID = WorldFunctions.getBlockID
 local WorldToBlock = WorldFunctions.WorldToBlock
 local convertBlockIdToBlockName = WorldFunctions.convertBlockIdToBlockName

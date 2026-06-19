@@ -24,7 +24,6 @@ local ores = {
 }
 
 local oreCache = {}
-
 local visuals = {}
 local chunksScanned = {}
 local scanning = {}
@@ -77,7 +76,6 @@ local function addVisual(x, y, z, color, name, chunkName)
     part.CanCollide = false
     part.CanTouch = false
     part.CanQuery = false
-    part.CanTouch = false
     part.CastShadow = false
     part.Transparency = 1
     part.Size = Vector3.new(3, 3, 3)
@@ -139,6 +137,50 @@ local function scanFullChunk(chunkX, chunkZ)
     chunksScanned[chunkName] = true
     scanning[chunkName] = nil
 end
+
+local function hookChunkModifiers()
+    local chunkClass = env.t3
+    if not chunkClass then return end
+
+    local originalSet = chunkClass.Set
+    if originalSet and not chunkClass.SetModified then
+        chunkClass.Set = function(self, x, y, z, blockData, updateVis)
+            local res = originalSet(self, x, y, z, blockData, updateVis)
+            if module.enabled then
+                local worldX = self.xPos * 16 + x
+                local worldZ = self.zPos * 16 + z
+                local id = type(blockData) == "table" and blockData.id or blockData
+                if not id or id == 0 then
+                    removeVisual(worldX, y, worldZ)
+                end
+            end
+            return res
+        end
+        chunkClass.SetModified = true
+    end
+
+    local originalChange = chunkClass.Change
+    if originalChange and not chunkClass.ChangeModified then
+        chunkClass.Change = function(self, x, y, z, properties, updateVis)
+            local res = originalChange(self, x, y, z, properties, updateVis)
+            if module.enabled then
+                local worldX = self.xPos * 16 + x
+                local worldZ = self.zPos * 16 + z
+                local id = type(res) == "table" and res.id or res
+                if not id or id == 0 then
+                    removeVisual(worldX, y, worldZ)
+                end
+            end
+            return res
+        end
+        chunkClass.ChangeModified = true
+    end
+end
+
+task.spawn(function()
+    while not env.t3 do task.wait(0.1) end
+    hookChunkModifiers()
+end)
 
 ChunksFolder.ChildAdded:Connect(function(chunk)
     local coords = string.split(chunk.Name, "x")

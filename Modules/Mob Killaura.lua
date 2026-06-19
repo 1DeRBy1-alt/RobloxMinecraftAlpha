@@ -13,7 +13,7 @@ local module = getgenv().ModuleManager.new("MobKillaura", {
 })
 
 -- World Functions --
-local WorldFunctions = loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraft/main/WorldFunctions.lua"))()
+local WorldFunctions = loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/WorldFunctions.lua"))()
 local WorldToBlock = WorldFunctions.WorldToBlock
 
 -- Functions --

@@ -10,7 +10,7 @@ end
 getgenv().spectraLoadedMC = true
 
 -- Anti Kick --
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/refs/heads/main/Modules/anti_kick.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/anti_kick.lua", true))()
 
 repeat task.wait(0.5) until workspace:FindFirstChild("Chunks") and workspace:FindFirstChild("Entities")
 
@@ -21,15 +21,15 @@ AkaliNotif.Notify({
 })
 
 -- Module Manager --
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/refs/heads/main/Modules/ModuleManager.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/ModuleManager.lua", true))()
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/XRay.lua", true))() -- XRay
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/refs/heads/main/Modules/Scaffold.lua", true))() -- Scaffold
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/Scaffold.lua", true))() -- Scaffold
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/Killaura.lua", true))() -- Killaura
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/refs/heads/main/Modules/Mob%20Killaura.lua", true))() -- Mob Killaura
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/refs/heads/main/Modules/ChestStealer.lua", true))() -- Chest Stealer
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/Mob%20Killaura.lua", true))() -- Mob Killaura
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/ChestStealer.lua", true))() -- Chest Stealer
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/Movement/init.lua", true))() -- Movement
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/refs/heads/main/Modules/hitbox_expander.lua"))() -- Hitbox Expander
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/Modules/hitbox_expander.lua"))() -- Hitbox Expander
 
 local MM = getgenv().ModuleManager
 local kaModule = MM.get("Killaura")
@@ -93,7 +93,7 @@ local Tabs = {
 local Options = Fluent.Options
 
 -- World Functions --
-local WorldFunctions = loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/refs/heads/main/WorldFunctions.lua"))()
+local WorldFunctions = loadstring(game:HttpGet("https://raw.githubusercontent.com/1DeRBy1-alt/RobloxMinecraftAlpha/main/WorldFunctions.lua"))()
 
 -- Credits Tab --
 Tabs.Credits:AddParagraph({
